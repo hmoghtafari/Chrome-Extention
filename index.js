@@ -2,7 +2,8 @@ const author = document.getElementById("author");
 const cryptoTop = document.getElementById("crypto-top");
 const crypto = document.getElementById("crypto");
 const time = document.getElementById("time");
-function imgbackground() {
+const weather = document.getElementById("weather");
+function imgBackground() {
   fetch(
     "https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature"
   )
@@ -17,7 +18,7 @@ function imgbackground() {
       author.textContent = `By: Hossein Moghtafari`;
     });
 }
-imgbackground();
+imgBackground();
 
 function getCrypto() {
   fetch("https://api.coingecko.com/api/v3/coins/bitcoin")
@@ -29,7 +30,7 @@ function getCrypto() {
       return res.json();
     })
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       cryptoTop.innerHTML = `
       <img src = ${data.image.small} />
       <span>${data.name}</span>
@@ -50,9 +51,39 @@ function getCrypto() {
     .catch((err) => console.error(Error));
 }
 getCrypto();
+// setInterval(getCrypto, 30 * 1000)
 function getCurrentTime() {
   const date = new Date();
   const currentTime = date.toLocaleTimeString("en-us", { timeStyle: "medium" });
   time.textContent = currentTime;
 }
 setInterval(getCurrentTime, 1000);
+
+function getCurrentWeather() {
+  navigator.geolocation.getCurrentPosition((position) => {
+    fetch(
+      `https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`
+    )
+      .then((res) => {
+        if (!res.ok) {
+          console.log(res.status);
+          throw Error("Something went wrong");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+        weather.innerHTML = `
+        
+          <img src=${iconUrl} />
+          <span class = "weather-temp">${Math.round(data.main.temp)}º </span>
+        
+        <span class= "weather-city">${data.name} </span>
+        `;
+      })
+      .catch((err) => console.error(err));
+  });
+}
+getCurrentWeather();
+setInterval(getCurrentWeather, 60 * 1000);
