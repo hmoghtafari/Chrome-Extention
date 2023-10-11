@@ -50,7 +50,9 @@ function getCrypto() {
     .catch((err) => console.error(Error));
 }
 getCrypto();
-
-const date = new Date();
-const currentTime = date.toLocaleTimeString("en-us", { timeStyle: "short" });
-time.textContent = currentTime;
+function getCurrentTime() {
+  const date = new Date();
+  const currentTime = date.toLocaleTimeString("en-us", { timeStyle: "medium" });
+  time.textContent = currentTime;
+}
+setInterval(getCurrentTime, 1000);
