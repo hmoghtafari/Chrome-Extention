@@ -49,6 +49,7 @@ div.weather {
   align-items: center;
   flex-wrap: wrap;
   justify-content: end;
+  margin-top: -40px;
  }
 div.weather > img {
   width: 70px;
@@ -58,7 +59,7 @@ div.weather > img {
   width: 100%;
   margin: 0;
   text-align: end;
-  margin-top: -60px;
+  margin-top: -80px;
 }
 
 .weather-temp{
