@@ -32,3 +32,15 @@ div.header {
 div.main {
   align-self: center;
 }
+div.crypto > p {
+  margin: 0;
+}
+div.crypto {
+  font-size: 1.3 rem;
+}
+div.crypto-top{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
