@@ -72,7 +72,7 @@ function getCurrentWeather() {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
         weather.innerHTML = `
         
